@@ -2,4 +2,9 @@
     <string name="app_name">On The Nature of Fragments</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+    <string name="placeholder">placeholder</string>
+    <string name="total_oncreated">Total onCreated:</string>
+    <string name="created_in_this_instance">Created in this instance:</string>
+    <string name="number">Number:</string>
+    <string name="ctor_identifier">Ctor identifier:</string>
 </resources>

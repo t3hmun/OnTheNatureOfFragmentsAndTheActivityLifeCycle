@@ -3,8 +3,6 @@ package com.t3hmun.onthenatureoffragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -113,16 +111,16 @@ public class MainActivity extends AppCompatActivity {
      */
     public static class PlaceholderFragment extends Fragment {
         /**
-         * The fragment argument representing the section number for this
+         * The fragment argument representing the instanceSection number for this
          * fragment.
          */
         private static final String TAG = "Fragment";
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_TOTAL_CREATIONS = "total_creations";
 
-        private int creationCount = 0;
+        private int instanceCreationCount = 0;
         private String ctorIdentifier;
-        private String section = "?";
+        private String instanceSection = "?";
 
         public PlaceholderFragment() {
             Log.d(TAG, "ctor-default");
@@ -136,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /**
-         * Returns a new instance of this fragment for the given section
+         * Returns a new instance of this fragment for the given instanceSection
          * number.
          */
         public static PlaceholderFragment newInstance(String sectionNumber) {
@@ -144,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             PlaceholderFragment fragment = new PlaceholderFragment("newInstance-" + sectionNumber);
             Bundle args = new Bundle();
             args.putString(ARG_SECTION_NUMBER, sectionNumber);
-            // For this to work this method should only be called once ever for each section.
+            // For this to work this method should only be called once ever for each instanceSection.
             args.putInt(ARG_TOTAL_CREATIONS, 0);
             fragment.setArguments(args);
             return fragment;
@@ -155,9 +153,13 @@ public class MainActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
 
             // Increment this Fragment instance's creation counter.
-            creationCount++;
+            instanceCreationCount++;
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+            TextView bundleSectionText = (TextView) rootView.findViewById(R.id.bundle_section);
+            TextView instCreatedText = (TextView) rootView.findViewById(R.id.created_inst);
+            TextView totalCreatedText = (TextView) rootView.findViewById(R.id.created_total);
+            TextView ctorIdText = (TextView) rootView.findViewById(R.id.ctor_id);
+            TextView instSectionText = (TextView) rootView.findViewById(R.id.instance_section);
 
             Bundle arguments = getArguments();
 
@@ -167,64 +169,69 @@ public class MainActivity extends AppCompatActivity {
             arguments.putInt(ARG_TOTAL_CREATIONS, totalCreations);
 
             String bundleNum = arguments.getString(ARG_SECTION_NUMBER);
-            section = bundleNum;
-            Log.d(TAG, "onCreateView " + section);
-            textView.setText("bundle: " + bundleNum + " created: " + creationCount + " total: " + totalCreations + " ident: " + ctorIdentifier);
+            instanceSection = bundleNum;
+            Log.d(TAG, "onCreateView " + instanceSection);
+
+            bundleSectionText.setText(bundleNum);
+            instCreatedText.setText(Integer.toString(instanceCreationCount));
+            totalCreatedText.setText(Integer.toString(totalCreations));
+            ctorIdText.setText(ctorIdentifier);
+            instSectionText.setText(instanceSection);
 
             return rootView;
         }
 
         @Override
         public void onStart() {
-            Log.d(TAG, "onStart " + section);
+            Log.d(TAG, "onStart " + instanceSection);
             super.onStart();
         }
 
         @Override
         public void onAttach(Context context) {
-            Log.d(TAG, "onAttach " + section);
+            Log.d(TAG, "onAttach " + instanceSection);
             super.onAttach(context);
         }
 
         @Override
         public void onPause() {
-            Log.d(TAG, "onPause " + section);
+            Log.d(TAG, "onPause " + instanceSection);
             super.onPause();
         }
 
         @Override
         public void onResume() {
-            Log.d(TAG, "onResume " + section);
+            Log.d(TAG, "onResume " + instanceSection);
             super.onResume();
         }
 
         @Override
         public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-            Log.d(TAG, "onViewCreated " + section);
+            Log.d(TAG, "onViewCreated " + instanceSection);
             super.onViewCreated(view, savedInstanceState);
         }
 
         @Override
         public void onStop() {
-            Log.d(TAG, "onStop " + section);
+            Log.d(TAG, "onStop " + instanceSection);
             super.onStop();
         }
 
         @Override
         public void onDetach() {
-            Log.d(TAG, "onDetach " + section);
+            Log.d(TAG, "onDetach " + instanceSection);
             super.onDetach();
         }
 
         @Override
         public void onDestroyView() {
-            Log.d(TAG, "onDestroyView " + section);
+            Log.d(TAG, "onDestroyView " + instanceSection);
             super.onDestroyView();
         }
 
         @Override
         public void onDestroy() {
-            Log.d(TAG, "onDestroy " + section);
+            Log.d(TAG, "onDestroy " + instanceSection);
             super.onDestroy();
         }
     }
